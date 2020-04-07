@@ -177,6 +177,11 @@ tibin
   float:left;
   width:20%; /* The width is 20%, by default */
 }
+.countarea
+{
+  margin-left:7%;
+  color:black;
+}
 
 /* Use a media query to add a break point at 800px: */
 @media screen and (max-width:800px) {
@@ -184,6 +189,7 @@ tibin
     width:100%; /* The width is 100%, when the viewport is 800px or smaller */
   }
 }
+
 </style>
 <script>
   window.console = window.console || function(t) {};
@@ -203,9 +209,10 @@ tibin
   
  <a href=contact.html> About Me</a></div>
     <div class="approx">
-<div class=interior><h2>C0d3d By TiBiN</h2></div>
-<textarea placeholder="Add URLs" rows="20" name="comment[text]" id="comment_text" cols="40" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true"></textarea>
-<div class=interior><h2>&nbsp;&nbsp;&nbsp;&nbsp;R3SULT</h2></div>
+<div class=interior><h2>C0d3d By TiBiN</h2><countlines class="countarea"></countlines></div>
+
+<textarea onmouseout=letscount() placeholder="Add URLs" rows="20" name="comment[text]" id="comment_text" cols="40" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true"></textarea>
+<div class=interior><h2>&nbsp;&nbsp;&nbsp;&nbsp;R3SULT</h2><count_dupli class="countarea"></count_dupli></div>
 <textarea placeholder="Result Is Here" rows="20" name="comment[text]" id="result" cols="40" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true"></textarea>
 
 
@@ -230,6 +237,21 @@ tibin
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 </body>
 <script>
+  function letscount()
+  {
+    var count_first=0
+    var url_list=document.getElementById("comment_text").value
+    url_list=url_list.concat("\n")
+var len=url_list.length
+    for(i=0;i<len;i++)
+{
+    if(url_list[i]=="\n")
+{
+  count_first=count_first+1
+}
+  }
+ $("countlines").text("Total Number of URLs: ".concat(count_first))
+  }
 //HTTP REMOVER__This Script literaly ate my Brain
  $("#Submit").click(function (){
  var count=0
@@ -312,6 +334,7 @@ $("#result").text(result)
  var j_loop
  var i_loop
  var result2=""
+ var count_dupli=0;
  for(i=0;i<=len;i++)
  {
      if(url_list[i]!="\n")
@@ -321,6 +344,7 @@ $("#result").text(result)
  else
  {
   dupli.push(filer)
+ 
   filer=""
  }
 
@@ -334,11 +358,13 @@ var array_leng=uniqueNames.length;
  }
 for(var i_loop=0;i_loop<array_leng;i_loop++)
 {
+  count_dupli=count_dupli+1
   result2=result2.concat(uniqueNames[i_loop])
   result2=result2.concat("\n")
 }
 
 $("#result").text(result2)
+$("count_dupli").text("Urls after removing :".concat(count_dupli))
   })
 //Dark Mode Toggle
 var analyser=0
@@ -355,6 +381,7 @@ $("h2").css("color","white")
 $("tibin").css("color","white")
 $("textarea").css("border-style","solid solid solid solid")
 $(".footer").css("color","white")
+$(".countarea").css("color","white")
 
 }
 else
@@ -367,6 +394,8 @@ $("h2").css("color","black")
 $("tibin").css("color","black")
 $("textarea").css("border-style","none solid solid none")
 $(".footer").css("color","black")
+$(".countarea").css("color","black")
+
 analyser=0
 
 }
